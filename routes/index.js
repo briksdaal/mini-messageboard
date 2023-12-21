@@ -5,12 +5,12 @@ const messages = [
   {
     text: 'Hi there!',
     user: 'Boris',
-    added: new Date(),
+    added: new Date('2023-08-14T18:24:24.888'),
   },
   {
     text: 'We are!',
     user: 'Luffy',
-    added: new Date(),
+    added: new Date('2023-11-23T12:54:03.888'),
   },
 ];
 
