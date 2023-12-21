@@ -3,3 +3,18 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  ul
+    each msg in messages
+      div
+        p= msg.text
+        p
+         |By:
+         |
+         =msg.user
+        p 
+         |Posted: 
+         =datefns.format(msg.added, "HH:mm:ss dd/MM/yyyy")
+    else
+      div No messages yet...
+    
+    a(href="/new") Add a message...

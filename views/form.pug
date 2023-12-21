@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  form(method='POST', action='/new')
+    label Name
+      div
+        input(type='text', name='name')
+    label Message
+      div
+        textarea(name='message')
+    button(type='submit') Submit Message
+
+  a(href="/") Back to the message board
+  
