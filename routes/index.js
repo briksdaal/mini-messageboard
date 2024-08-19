@@ -1,25 +1,15 @@
 var express = require('express');
 var router = express.Router();
-
-const messages = [
-  {
-    text: 'Hi there!',
-    user: 'Boris',
-    added: new Date('2023-08-14T18:24:24.888'),
-  },
-  {
-    text: 'We are!',
-    user: 'Luffy',
-    added: new Date('2023-11-23T12:54:03.888'),
-  },
-];
+const queries = require('../db/queries');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
   req.app.locals['datefns'] = require('date-fns');
+  const dbMessages = await queries.getAllMessages();
+  console.log(dbMessages);
   res.render('index', {
     title: 'Mini Message Board',
-    messages,
+    messages: dbMessages,
   });
 });
 
@@ -29,12 +19,9 @@ router.get('/new', function (req, res, next) {
 });
 
 /* POST new message */
-router.post('/new', function (req, res, next) {
-  messages.push({
-    user: req.body.name,
-    text: req.body.message,
-    added: new Date(),
-  });
+router.post('/new', async function (req, res, next) {
+  await queries.addMessage(req.body.name, req.body.message);
+
   res.redirect('/');
 });
 
